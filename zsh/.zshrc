@@ -1,0 +1,1 @@
+/home/vasilis/.zshrc
