@@ -22,6 +22,9 @@ vim.pack.add({
   { src = "https://github.com/nvim-treesitter/nvim-treesitter" },
   { src = "https://github.com/neovim/nvim-lspconfig" },
   { src = "https://github.com/echasnovski/mini.pairs" },
+  { src = "https://github.com/rebelot/kanagawa.nvim" },
+  { src = "https://github.com/echasnovski/mini.align" },
+  { src = "https://github.com/echasnovski/mini.surround" },
 })
 
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -34,16 +37,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
 })
 vim.cmd("set completeopt+=noselect")
 
-vim.lsp.enable({ 'lua_ls', 'rust_analyzer' })
+vim.lsp.enable({ 'lua_ls', 'rust_analyzer', 'clangd'})
 
 vim.keymap.set({ 'n', 'v' }, 'j', 'gj')
 vim.keymap.set({ 'n', 'v' }, 'k', 'gk')
+vim.keymap.set('n', '<CR>j', 'o<ESC>')
+vim.keymap.set('n', '<CR>k', 'O<ESC>')
+
 vim.keymap.set('n', '<leader>lf', vim.lsp.buf.format)
 vim.keymap.set('n', '<leader>e', ":Oil<CR>")
 vim.keymap.set('n', '<leader>f', ":Pick files<CR>")
 
 require 'mini.pick'.setup()
 require 'mini.pairs'.setup()
+require 'mini.align'.setup()
+require 'mini.surround'.setup()
 
 require "nvim-treesitter.configs".setup({
   ensure_installed = { "c", "bash", "vim", "lua", "rust" },
@@ -66,5 +74,6 @@ vim.diagnostic.config({
   },
 })
 
-vim.cmd("colorscheme rose-pine-moon")
+-- vim.cmd("colorscheme rose-pine-moon")
+vim.cmd("colorscheme kanagawa-wave")
 vim.cmd(":hi statusline guibg=NONE")
